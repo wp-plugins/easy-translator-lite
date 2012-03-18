@@ -3,7 +3,7 @@
 Plugin Name: Easy Translator Lite
 Plugin URI: http://www.thulasidas.com/ezTrans
 Description: A plugin to translate other plugins (Yes, any other plugin) Access it by clicking <a href="tools.php?page=easy-translator-lite/easy-translator-lite.php">Tools &rarr; Easy Translator Lite</a>.
-Version: 2.00
+Version: 2.01
 Author: Manoj Thulasidas
 Author URI: http://www.thulasidas.com
 */
@@ -110,6 +110,7 @@ if (!class_exists("ezTran") && !class_exists("PO")) {
           '<div class="updated">Reloaded the translations from PHP files and MO.</div> ' ;
         unset($_SESSION['ezt-POs']) ;
         $_POST['ezt-loadmo'] = 'Load MO' ;
+        // session_destroy() ;
       }
       if ($_POST['ezt-mailPot']) {
         echo '<div style="background-color:#cff;padding:5px;border: solid 1px;margin-top:10px;">';
@@ -280,14 +281,20 @@ msgstr ""
       // for a returning translator
       $plugin = $_SESSION['ezt-plugin'] ;
 
-      if (isset($_POST['ezt-loadmo'])){
+      if (isset($_POST['ezt-loadmo']) || isset($_POST['ezt-loadnewmo'])){
         $name = $_POST['ezt-name'];
         $_SESSION['ezt-name'] = $name ;
-        $mofile = realpath($_POST['ezt-mofile']) ;
-        $_SESSION['ezt-mofile'] = $mofile ;
         $plgdir = realpath(dirname(__FILE__) . '/../' . dirname($plugin)) ;
         $_SESSION['ezt-plgdir'] = $plgdir ;
-        $moname = substr($mofile,strlen($plgdir)) ;
+        if (isset($_POST['ezt-loadnewmo'])){
+          $mofile = $_POST['ezt-newmo'] ;
+          $moname = $mofile ;
+        }
+        else {
+          $mofile = realpath($_POST['ezt-mofile']) ;
+          $moname = substr($mofile,strlen($plgdir)) ;
+        }
+        $_SESSION['ezt-mofile'] = $mofile ;
         $_SESSION['ezt-moname'] = $moname ;
         $domain = $_POST['ezt-domain'] ;
         $_SESSION['ezt-domain'] = $domain ;
@@ -321,7 +328,7 @@ msgstr ""
 
       echo $selPlugin ;
       echo '<input type="hidden" name="ezt-name" value="'.$plugin_name.'" />';
-      $loadPlugin = '&nbsp; <input type="submit" name="ezt-load" value="Load it" /> <br />' .
+      $loadPlugin = '&nbsp; <input type="submit" style="width:10%" name="ezt-load" value="Load it" /> <br />' .
         "\n"  ;
       echo $loadPlugin ;
 
@@ -370,9 +377,16 @@ msgstr ""
       $mosel .= '</select>' ;
       echo $mosel ;
 
-      $loadmo = '&nbsp; <input type="submit" name="ezt-loadmo" value="Load MO" />' .
-        "<br /><br />\n" ;
+      $loadmo = '&nbsp; <input type="submit" style="width:10%" name="ezt-loadmo" value="Load MO" />' .
+        "<br />\n" ;
       echo $loadmo;
+
+      $newmo = '<div style="width: 15%; float:left">Or Create New MO:</div>' .
+        "<input type='text' name='ezt-newmo' style='width:40%'>" .
+        '&nbsp; <input type="submit" style="width:10%" name="ezt-loadnewmo" value="Create MO" />' .
+        "<br /><br />\n" ;
+
+      echo $newmo ;
 
       if (strlen($mofile) <= 0 || strlen($moname) <= 0) {
         echo $this->errMsg('Please select and load an MO file', 'updated') ;

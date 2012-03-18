@@ -4,7 +4,7 @@ Donate link: http://www.Thulasidas.com/buy
 Tags: plugins, internationalization, translation, translator, localization, i18n, l10n
 Requires at least: 2.8
 Tested up to: 3.3
-Stable tag: 2.00
+Stable tag: 2.01
 
 Easy Translator is a plugin translation tool for authors and translators. (Not a blog page translator!)
 
@@ -15,6 +15,12 @@ Easy Translator is a plugin translation tool for authors and translators. (Not a
 If you are a plugin author interested in internationalizing your plugins, you may want to ask your potential translators to install *Easy Translator Lite* to make it a snap to give you translations. If you want to clean up your internationalization, you will appreciate *Easy Translator* because it does a fuzzy string matching to highlight possible repetitions and conflicts among key strings.
 
 Note that *Easy Translator* is **not** a blog page translator for a blogger. It is a tool for plugin authors and the kind international users who put in their time and effort to translate plugins. If you fall in that category, please it a go.
+
+== Upgrade Notice ==
+
+= 2.01 =
+
+Adding a new feature to create a new MO file (rather than just editing an existing one).
 
 == Screenshots ==
 
@@ -38,10 +44,15 @@ Note that *Easy Translator* is **not** a blog page translator for a blogger. It 
 
 *Easy Translator* uses the PHP "super-global" variables (`$_SESSION[]`) to hold various strings and settings between your visits so that your translation work is not accidentally erased. I hope to have implemented it safely. But as any developer will tell you, there is nothing safe about using globals. If you find anything amiss, I'd appreciate it if you could let me know. Please post it in [the forum](http://wordpress.org/tags/easy-translator-lite "Easy Translator Forum") or [email me](http://manoj.thulasidas.com/mail.shtml "Contact Manoj").
 
+= The PO files created generate errors when I run `msgfmt` on them. What are these errors? =
+
+The plugin has a known issue with quotation marks within strings. Some of the quotations marks don't get escaped with a backslash. I think this issue is locale-specific, and don't know how to solve it. If you have any ideas, please let me know. The workaround is to edit the generated PO files with a text editor and go to the lines that give you errors in `msgfmt`. You will most likely find some unescaped quotes that you should prepend a backslash to. It should then go through `msgfmt` without error. Another known problem is that in some locales, the `\n` character in the first few lines appear as `n` -- again in a locale-specific way.
+
 == Change Log ==
 
 = Past =
 
+* V2.01: Adding a new feature to create a new MO file (rather than just editing an existing one). [Mar 19, 2012]
 * V2.00: Releasing a Lite and Pro version. [Mar 6, 2012]
 * V1.01: Correcting a few minor bugs (a) Author email (of the plugin being translated was set to the author of this plugin. (b) The name of the plugin was set to *Easy AdSense* (Thanks, Sub!). (c) Some corrections are needed for escaping quotation marks and line breaks in locales other than English. Will include them in the next release. (Hard to test because my locale is en_US).
 * V1.00: Initial release. [July 21, 2009]
