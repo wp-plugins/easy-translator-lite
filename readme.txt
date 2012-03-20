@@ -4,7 +4,7 @@ Donate link: http://www.Thulasidas.com/buy
 Tags: plugins, internationalization, translation, translator, localization, i18n, l10n
 Requires at least: 2.8
 Tested up to: 3.3
-Stable tag: 2.01
+Stable tag: 2.02
 
 Easy Translator is a plugin translation tool for authors and translators. (Not a blog page translator!)
 
@@ -18,9 +18,9 @@ Note that *Easy Translator* is **not** a blog page translator for a blogger. It 
 
 == Upgrade Notice ==
 
-= 2.01 =
+= 2.02 =
 
-Adding a new feature to create a new MO file (rather than just editing an existing one).
+Changing the `php` file search to recursive.
 
 == Screenshots ==
 
@@ -52,6 +52,7 @@ The plugin has a known issue with quotation marks within strings. Some of the qu
 
 = Past =
 
+* V2.02: Changing the php file search to recursive. [Mar 20, 2012]
 * V2.01: Adding a new feature to create a new MO file (rather than just editing an existing one). [Mar 19, 2012]
 * V2.00: Releasing a Lite and Pro version. [Mar 6, 2012]
 * V1.01: Correcting a few minor bugs (a) Author email (of the plugin being translated was set to the author of this plugin. (b) The name of the plugin was set to *Easy AdSense* (Thanks, Sub!). (c) Some corrections are needed for escaping quotation marks and line breaks in locales other than English. Will include them in the next release. (Hard to test because my locale is en_US).

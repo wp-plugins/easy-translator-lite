@@ -3,7 +3,7 @@
 Plugin Name: Easy Translator Lite
 Plugin URI: http://www.thulasidas.com/ezTrans
 Description: A plugin to translate other plugins (Yes, any other plugin) Access it by clicking <a href="tools.php?page=easy-translator-lite/easy-translator-lite.php">Tools &rarr; Easy Translator Lite</a>.
-Version: 2.01
+Version: 2.02
 Author: Manoj Thulasidas
 Author URI: http://www.thulasidas.com
 */
@@ -128,6 +128,18 @@ if (!class_exists("ezTran") && !class_exists("PO")) {
 
     // Return the contents of all PHP files in the dir specified
     function getFileContents($dir="") {
+      if ($dir == "") $dir = dirname(__FILE__) ;
+      $files = $this->rglob('*.php', 0, $dir) ;
+      $page = "" ;
+      foreach ($files as $f) {
+        $page .= file_get_contents($f, FILE_IGNORE_NEW_LINES) ;
+      }
+      return $page ;
+    }
+
+    // Old version -- non-recursive file search.
+    // Keep it, just in case...
+    function getFileContents0($dir="") {
       if ($dir == "") $dir = dirname(__FILE__) ;
       $files = glob($dir . '/*.php') ;
       $page = "" ;
@@ -382,7 +394,7 @@ msgstr ""
       echo $loadmo;
 
       $newmo = '<div style="width: 15%; float:left">Or Create New MO:</div>' .
-        "<input type='text' name='ezt-newmo' style='width:40%'>" .
+        "<input type='text' name='ezt-newmo' style='width:40%' value=$locale>" .
         '&nbsp; <input type="submit" style="width:10%" name="ezt-loadnewmo" value="Create MO" />' .
         "<br /><br />\n" ;
 
@@ -528,7 +540,7 @@ Enter the translated strings in the text boxes below and hit the "Display POT Fi
     function plugin_action($links, $file) {
       if ($file == plugin_basename(dirname(__FILE__).'/easy-translator-lite.php')){
       $settings_link = "<a href='tools.php?page=easy-translator-lite/easy-translator-lite.php'>" .
-        'Lauch it' . "</a>";
+        'Launch it' . "</a>";
       array_unshift( $links, $settings_link );
       }
       return $links;
