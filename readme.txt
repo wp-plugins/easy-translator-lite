@@ -1,10 +1,10 @@
-=== Easy Translator Lite ===
+=== Easy Translator ===
 Contributors: manojtd
 Donate link: http://www.Thulasidas.com/buy
 Tags: plugins, internationalization, translation, translator, localization, i18n, l10n
 Requires at least: 2.8
 Tested up to: 3.3
-Stable tag: 2.02
+Stable tag: 2.03
 
 Easy Translator is a plugin translation tool for authors and translators. (Not a blog page translator!)
 
@@ -12,7 +12,7 @@ Easy Translator is a plugin translation tool for authors and translators. (Not a
 
 *Easy Translator* is a plugin to translate other plugins. It picks up translatable strings (in `_[_e]()` functions) and presents them and their existing translations (from the MO object of the current text-domain, if loaded) in a user editable form. It can generate a valid PO file that can be emailed to the plugin author. The [Pro Version](http://buy.thulasidas.com/easy-translator "Buy the Pro Version for $1.95") lets your translators email the PO file directly from the its window, streamlining their work. (Not a big deal really because you can always save the PO file and email it yourself. Still...)
 
-If you are a plugin author interested in internationalizing your plugins, you may want to ask your potential translators to install *Easy Translator Lite* to make it a snap to give you translations. If you want to clean up your internationalization, you will appreciate *Easy Translator* because it does a fuzzy string matching to highlight possible repetitions and conflicts among key strings.
+If you are a plugin author interested in internationalizing your plugins, you may want to ask your potential translators to install *Easy Translator* to make it a snap to give you translations. If you want to clean up your internationalization, you will appreciate *Easy Translator* because it does a fuzzy string matching to highlight possible repetitions and conflicts among key strings.
 
 Note that *Easy Translator* is **not** a blog page translator for a blogger. It is a tool for plugin authors and the kind international users who put in their time and effort to translate plugins. If you fall in that category, please it a go.
 
@@ -52,6 +52,7 @@ The plugin has a known issue with quotation marks within strings. Some of the qu
 
 = Past =
 
+* V2.03: Renaming the plugin to drop the word Lite. [May 11, 2012]
 * V2.02: Changing the php file search to recursive. [Mar 20, 2012]
 * V2.01: Adding a new feature to create a new MO file (rather than just editing an existing one). [Mar 19, 2012]
 * V2.00: Releasing a Lite and Pro version. [Mar 6, 2012]

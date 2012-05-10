@@ -1,9 +1,9 @@
 <?php
 /*
-Plugin Name: Easy Translator Lite
+Plugin Name: Easy Translator
 Plugin URI: http://www.thulasidas.com/ezTrans
-Description: A plugin to translate other plugins (Yes, any other plugin) Access it by clicking <a href="tools.php?page=easy-translator-lite/easy-translator-lite.php">Tools &rarr; Easy Translator Lite</a>.
-Version: 2.02
+Description: <em>Lite Version<em>: A plugin to translate other plugins (Yes, any other plugin) Access it by clicking <a href="tools.php?page=easy-translator-lite/easy-translator-lite.php">Tools &rarr; Easy Translator</a>.
+Version: 2.03
 Author: Manoj Thulasidas
 Author URI: http://www.thulasidas.com
 */
@@ -274,7 +274,7 @@ msgstr ""
 ?>
 <div class="wrap" style="width:900px">
 <form method="post" action="<?php echo $_SERVER["REQUEST_URI"]; ?>">
-<h2>Easy Translator Lite</h2>
+<h2>Easy Translator</h2>
 
 <?php
       global $l10n;
@@ -319,7 +319,7 @@ msgstr ""
 
       $version = (float)get_bloginfo('version') ;
       if ($version < 2.80) {
-        echo $this->errMsg('Sorry, Easy Translator Lite works only on WP2.8+') ;
+        echo $this->errMsg('Sorry, Easy Translator works only on WP2.8+') ;
         return ;
       }
 
@@ -525,7 +525,7 @@ Enter the translated strings in the text boxes below and hit the "Display POT Fi
 <tr><td>
 <ul style="padding-left:10px;list-style-type:circle; list-style-position:inside;" >
 <li>
-<?php printf(__('%s uses the excellent Javascript/DHTML tooltips by %s', 'easy-adsenser'), '<b>Easy Translator Lite</b>', '<a href="http://www.walterzorn.com" target="_blank" title="Javascript, DTML Tooltips"> Walter Zorn</a>.') ;
+<?php printf(__('%s uses the excellent Javascript/DHTML tooltips by %s', 'easy-adsenser'), '<b>Easy Translator</b>', '<a href="http://www.walterzorn.com" target="_blank" title="Javascript, DTML Tooltips"> Walter Zorn</a>.') ;
 ?>
 </li>
 </ul>
@@ -556,7 +556,7 @@ if (class_exists("ezTran")) {
       function ezTran_ap() {
         global $ezTran ;
         if (function_exists('add_submenu_page'))
-          add_submenu_page('tools.php','Easy Translator Lite', 'Easy Translator Lite',
+          add_submenu_page('tools.php','Easy Translator', 'Easy Translator',
                            "install_plugins", __FILE__, array(&$ezTran, 'printAdminPage'));
         add_filter('plugin_action_links', array($ezTran, 'plugin_action'), -10, 2);
       }
