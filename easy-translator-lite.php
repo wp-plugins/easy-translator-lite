@@ -2,8 +2,8 @@
 /*
 Plugin Name: Easy Translator
 Plugin URI: http://www.thulasidas.com/ezTrans
-Description: <em>Lite Version<em>: A plugin to translate other plugins (Yes, any other plugin) Access it by clicking <a href="tools.php?page=easy-translator-lite/easy-translator-lite.php">Tools &rarr; Easy Translator</a>.
-Version: 2.03
+Description: A plugin to translate other plugins (Yes, any other plugin) Access it by clicking <a href="tools.php?page=easy-translator-lite/easy-translator-lite.php">Tools &rarr; Easy Translator</a>.
+Version: 2.04
 Author: Manoj Thulasidas
 Author URI: http://www.thulasidas.com
 */
@@ -25,7 +25,7 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-define('minmatch', 89) ;
+define('MINMATCH', 89) ;
 
 if (!class_exists("ezTran") && !class_exists("PO")) {
   class PO { // an id-str pair with attributes
@@ -34,14 +34,17 @@ if (!class_exists("ezTran") && !class_exists("PO")) {
     function PO($id, $str) {
       $this->id = (string) $id ;
       $this->str = (string) $str ;
-      $this->tranVal = minmatch ;
-      $this->keyVal = minmatch ;
+      $this->tranVal = MINMATCH ;
+      $this->keyVal = MINMATCH ;
     }
 
     // Returns a properly escaped string
-    function decorate($str, $esc) {
-      $str = stripslashes($str) ;
-      $str = addcslashes($str, $esc) ;
+    static function decorate($str, $esc) {
+      if (!get_magic_quotes_gpc()) $str = addcslashes($str, $esc) ;
+      return $str ;
+    }
+    static function undecorate($str) {
+      if (!get_magic_quotes_gpc()) $str = stripslashes($str) ;
       return $str ;
     }
 
@@ -49,10 +52,10 @@ if (!class_exists("ezTran") && !class_exists("PO")) {
     function textId() {
       $ht = round(strlen($this->id)/52 + 1) * 25 ;
       $col = 'background-color:#f5f5f5;' ;
-      if ($this->keyVal > minmatch+1) {
+      if ($this->keyVal > MINMATCH+1) {
         $col = "background-color:#ffc;border: solid 1px #f00" ;
         $tit = 'onmouseover = "Tip(\'Another similar string: ' .
-          htmlspecialchars('<br /><em><b>' . $this->decorate($this->keyId, "\n") .
+          htmlspecialchars('<br /><em><b>' . $this->keyId .
                            '</b></em><br /> ', ENT_QUOTES) .
           'exists. Please alert the author.\',WIDTH, 300)" ' .
           'onmouseout="UnTip()"';
@@ -67,10 +70,10 @@ if (!class_exists("ezTran") && !class_exists("PO")) {
 
     function textStr() {
       $ht = round(strlen($this->id)/52 + 1) * 25 ;
-      if ($this->tranVal > minmatch+1){
+      if ($this->tranVal > MINMATCH+1){
         $col = "background-color:#fdd;border: solid 1px #f00" ;
         $tit = 'onmouseover = "Tip(\'Using the translation for a similar string: ' .
-          htmlspecialchars('<br /><em><b>' . $this->decorate($this->tranId, "\n") .
+          htmlspecialchars('<br /><em><b>' . $this->tranId .
                            '</b></em><br />', ENT_QUOTES) .
           'Please check carefully.\',WIDTH, 300)" ' .
           'onmouseout="UnTip()"';
@@ -100,7 +103,7 @@ if (!class_exists("ezTran") && !class_exists("PO")) {
         header('Expires: 0');
         header('Pragma: no-cache');
         ob_start() ;
-        print stripslashes(htmlspecialchars_decode($str, ENT_QUOTES)) ;
+        print htmlspecialchars_decode($str, ENT_QUOTES) ;
         ob_end_flush() ;
         $this->status = '<div class="updated">Pot file: ' . $file . ' was saved.</div> ' ;
         exit(0) ;
@@ -117,13 +120,6 @@ if (!class_exists("ezTran") && !class_exists("PO")) {
         $this->status = '<div class="updated">In the <a href="http://buy.thulasidas.com/easy-translator">Pro Version</a>, the Pot file: ' . $file . ' would have been  sent to ' . $author . ' (' . $authormail . '). In this Lite version, please download the PO file and email it using your mail client.</div> ' ;
         echo '</div>' ;
       }
-    }
-
-    // Returns a properly escaped string
-    function decorate($str, $esc) {
-      $str = stripslashes($str) ;
-      $str = addcslashes($str, $esc) ;
-      return $str ;
     }
 
     // Return the contents of all PHP files in the dir specified
@@ -226,9 +222,9 @@ msgstr ""
 
 ' ;
       foreach ($POs as $n => $po) {
-        $pot .= "msgid " . '"' . $this->decorate($po->id, "\n\r\"") . '"' . "\n" ;
+        $pot .= "msgid " . '"' . PO::decorate($po->id, "\n\r\"") . '"' . "\n" ;
         $t = $msg[$po->num] ;
-        $pot .= "msgstr " . '"' . $this->decorate($t, "\n\r") . '"' . "\n\n" ;
+        $pot .= "msgstr " . '"' . PO::decorate($t, "\n\r") . '"' . "\n\n" ;
       }
       return $pot ;
     }
@@ -250,7 +246,7 @@ msgstr ""
     function updatePot(&$POs, $msg){
       foreach ($POs as $n => $po) {
         $t = $msg[$po->num] ;
-        $po->str = $this->decorate($t, "\n\r") ;
+        $po->str = PO::undecorate($t) ;
       }
     }
 
@@ -277,6 +273,9 @@ msgstr ""
 <h2>Easy Translator</h2>
 
 <?php
+      @include(dirname (__FILE__).'/myPlugins.php');
+      renderRating() ;
+
       global $l10n;
    // Button handling should happen early
       if (isset($_POST['ezt-load'])) {
@@ -516,7 +515,6 @@ Enter the translated strings in the text boxes below and hit the "Display POT Fi
          echo $pot  . "\n</form>" ;
        }
       echo "<br /><hr />" ;
-      @include(dirname (__FILE__).'/myPlugins.php');
       $plgName = 'easy-translator' ;
       @include (dirname (__FILE__).'/tail-text.php');
 ?>

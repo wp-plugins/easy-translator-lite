@@ -1,10 +1,10 @@
 === Easy Translator ===
 Contributors: manojtd
-Donate link: http://www.Thulasidas.com/buy
+Donate link: http://affiliates.thulasidas.com
 Tags: plugins, internationalization, translation, translator, localization, i18n, l10n
 Requires at least: 2.8
-Tested up to: 3.3
-Stable tag: 2.03
+Tested up to: 3.4
+Stable tag: 2.04
 
 Easy Translator is a plugin translation tool for authors and translators. (Not a blog page translator!)
 
@@ -18,9 +18,9 @@ Note that *Easy Translator* is **not** a blog page translator for a blogger. It 
 
 == Upgrade Notice ==
 
-= 2.02 =
+= 2.04 =
 
-Changing the `php` file search to recursive.
+Taking care of the `magic_quotes_gpc`.
 
 == Screenshots ==
 
@@ -52,6 +52,7 @@ The plugin has a known issue with quotation marks within strings. Some of the qu
 
 = Past =
 
+* V2.04: Taking care of magic_quotes_gpc in PHP. [May 18, 2012]
 * V2.03: Renaming the plugin to drop the word Lite. [May 11, 2012]
 * V2.02: Changing the php file search to recursive. [Mar 20, 2012]
 * V2.01: Adding a new feature to create a new MO file (rather than just editing an existing one). [Mar 19, 2012]
