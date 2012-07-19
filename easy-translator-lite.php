@@ -3,7 +3,7 @@
 Plugin Name: Easy Translator
 Plugin URI: http://www.thulasidas.com/ezTrans
 Description: A plugin to translate other plugins (Yes, any other plugin) Access it by clicking <a href="tools.php?page=easy-translator-lite/easy-translator-lite.php">Tools &rarr; Easy Translator</a>.
-Version: 2.04
+Version: 2.05
 Author: Manoj Thulasidas
 Author URI: http://www.thulasidas.com
 */
@@ -91,7 +91,7 @@ if (!class_exists("ezTran") && !class_exists("PO")) {
     var $status, $error;
     function ezTran()
     {
-      session_start() ;
+      @session_start() ;
       $this->status = '' ;
       $this->error = '' ;
 
@@ -274,7 +274,6 @@ msgstr ""
 
 <?php
       @include(dirname (__FILE__).'/myPlugins.php');
-      renderRating() ;
 
       global $l10n;
    // Button handling should happen early
@@ -516,6 +515,8 @@ Enter the translated strings in the text boxes below and hit the "Display POT Fi
        }
       echo "<br /><hr />" ;
       $plgName = 'easy-translator' ;
+      $plgDir = dirname(__FILE__) ;
+      renderRating($myPlugins[$plgName], $plgDir, $killable=false) ;
       @include (dirname (__FILE__).'/tail-text.php');
 ?>
 <table class="form-table" >
