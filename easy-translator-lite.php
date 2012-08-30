@@ -3,7 +3,7 @@
 Plugin Name: Easy Translator
 Plugin URI: http://www.thulasidas.com/ezTrans
 Description: A plugin to translate other plugins (Yes, any other plugin) Access it by clicking <a href="tools.php?page=easy-translator-lite/easy-translator-lite.php">Tools &rarr; Easy Translator</a>.
-Version: 2.05
+Version: 2.06
 Author: Manoj Thulasidas
 Author URI: http://www.thulasidas.com
 */
@@ -52,6 +52,7 @@ if (!class_exists("ezTran") && !class_exists("PO")) {
     function textId() {
       $ht = round(strlen($this->id)/52 + 1) * 25 ;
       $col = 'background-color:#f5f5f5;' ;
+      $tit = '' ;
       if ($this->keyVal > MINMATCH+1) {
         $col = "background-color:#ffc;border: solid 1px #f00" ;
         $tit = 'onmouseover = "Tip(\'Another similar string: ' .
@@ -70,6 +71,8 @@ if (!class_exists("ezTran") && !class_exists("PO")) {
 
     function textStr() {
       $ht = round(strlen($this->id)/52 + 1) * 25 ;
+      $col = '' ;
+      $tit = '' ;
       if ($this->tranVal > MINMATCH+1){
         $col = "background-color:#fdd;border: solid 1px #f00" ;
         $tit = 'onmouseover = "Tip(\'Using the translation for a similar string: ' .
@@ -95,7 +98,7 @@ if (!class_exists("ezTran") && !class_exists("PO")) {
       $this->status = '' ;
       $this->error = '' ;
 
-      if ($_POST['ezt-savePot']) {
+      if (isset($_POST['ezt-savePot'])) {
         $file = $_POST['potFile'] ;
         $str = $_POST['potStr'] ;
         header('Content-Disposition: attachment; filename="' . $file .'"');
@@ -108,17 +111,14 @@ if (!class_exists("ezTran") && !class_exists("PO")) {
         $this->status = '<div class="updated">Pot file: ' . $file . ' was saved.</div> ' ;
         exit(0) ;
       }
-      if ($_POST['ezt-clear']) {
+      if (isset($_POST['ezt-clear'])) {
         $this->status =
           '<div class="updated">Reloaded the translations from PHP files and MO.</div> ' ;
         unset($_SESSION['ezt-POs']) ;
         $_POST['ezt-loadmo'] = 'Load MO' ;
-        // session_destroy() ;
       }
-      if ($_POST['ezt-mailPot']) {
-        echo '<div style="background-color:#cff;padding:5px;border: solid 1px;margin-top:10px;">';
-        $this->status = '<div class="updated">In the <a href="http://buy.thulasidas.com/easy-translator">Pro Version</a>, the Pot file: ' . $file . ' would have been  sent to ' . $author . ' (' . $authormail . '). In this Lite version, please download the PO file and email it using your mail client.</div> ' ;
-        echo '</div>' ;
+      if (isset($_POST['ezt-mailPot'])) {
+        $this->status = '<div style="background-color:#cff;padding:5px;margin:5px;border: solid 1px;margin-top:10px;">In the <a href="http://buy.thulasidas.com/easy-translator">Pro Version</a>, the Pot file would have been sent to the plugin author. In this Lite version, please download the PO file and email it using your mail client.</div> ' ;
       }
     }
 
@@ -190,8 +190,8 @@ if (!class_exists("ezTran") && !class_exists("PO")) {
       $keys = array_unique($matches[1]) ;
       $keys = str_replace(array("\'", '\"', '\n'), array("'", '"', "\n"), $keys) ;
       foreach ($keys as $n => $k) {
-        $v = $mo[$k] ;
-        $t = $v->translations[0] ;
+        @$v = $mo[$k] ;
+        @$t = $v->translations[0] ;
         $po = new PO($k, $t) ;
         $po->num = $n ;
         array_push($POs, $po) ;
@@ -252,6 +252,7 @@ msgstr ""
 
     // Error messages
     function errMsg($s, $class="error", $close=true) {
+      $e = '' ;
       if ($class == "error") $e = "<b>Error: </b>" ;
       $s = '<div class="' . $class . '"><p>' . $e . $s . '</p></div>' ;
       if ($close) $s .= "\n</form>\n</div>\n" ;
@@ -289,7 +290,8 @@ msgstr ""
       }
 
       // for a returning translator
-      $plugin = $_SESSION['ezt-plugin'] ;
+      $plugin = '' ;
+      if (!empty($_SESSION['ezt-plugin'] )) $plugin = $_SESSION['ezt-plugin'] ;
 
       if (isset($_POST['ezt-loadmo']) || isset($_POST['ezt-loadnewmo'])){
         $name = $_POST['ezt-name'];
@@ -342,12 +344,13 @@ msgstr ""
         "\n"  ;
       echo $loadPlugin ;
 
-      if (strlen($plugin) <= 0) {
+      if (empty($plugin)) {
         echo $this->errMsg('Select and load a plugin!', 'updated') ;
         return ;
       }
 
-      $domain = $_SESSION['ezt-domain'] ;
+      $domain = '' ;
+      if (!empty($_SESSION['ezt-domain'])) $domain = $_SESSION['ezt-domain'] ;
       if (strlen($domain) <= 0) $domain = $plugins[$plugin]['TextDomain'] ;
       if (strlen($domain) <= 0) $domain = dirname($plugin) ;
 
@@ -362,7 +365,8 @@ msgstr ""
 
       echo $textDomain ;
 
-      $plgdir = $_SESSION['ezt-plgdir'] ;
+      $plgdir = '' ;
+      if (!empty($_SESSION['ezt-plgdir'])) $plgdir = $_SESSION['ezt-plgdir'] ;
       if (strlen($plgdir) <= 0)
         $plgdir = realpath(dirname(__FILE__) . '/../' . dirname($plugin)) ;
       if (strlen($plgdir) <= 0) {
@@ -371,8 +375,10 @@ msgstr ""
         return ;
       }
 
-      $mofile = $_SESSION['ezt-mofile'] ;
-      $moname = $_SESSION['ezt-moname'] ;
+      $mofile = '' ;
+      if (!empty($_SESSION['ezt-mofile'])) $mofile = $_SESSION['ezt-mofile'] ;
+      $moname = '' ;
+      if (!empty($_SESSION['ezt-moname'])) $moname = $_SESSION['ezt-moname'] ;
 
       $mofiles = $this->rglob( '/*.mo', 0, $plgdir) ;
       $mosel = '<div style="width: 15%; float:left">MO File:</div>' .
@@ -489,11 +495,13 @@ If not, edit it further.
               $domain . "-" . $locale . '.po" />' ;
         echo '<input type="hidden" name="potStr" value="' . $pot . '" />' ;
         echo $saveStr ;
-        $author = $_SESSION['ezt-author'] ;
+        if (empty($_SESSION['ezt-author'])) $author = '' ;
+        else $author = $_SESSION['ezt-author'] ;
         $mail = '<div style="width: 15%; float:left">Plugin Author:</div>' .
           '<input type="text" style="width: 30%" name="ezt-author" value="' .
           $author . '" /><br />' . "\n" ;
-        $authormail = $_SESSION['ezt-authormail'] ;
+        if (empty($_SESSION['ezt-authormail'])) $authormail = '' ;
+        else $authormail = $_SESSION['ezt-authormail'] ;
         // if (strlen($authormail) <= 0) $authormail = '(To email the pot file)' ;
         $mail .= '<div style="width: 15%; float:left">Author\'s Email:</div>' .
           '<input type="text" style="width: 30%" name="ezt-authormail" value="' .
