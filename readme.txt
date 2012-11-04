@@ -1,10 +1,10 @@
 === Easy Translator ===
 Contributors: manojtd
-Donate link: http://affiliates.thulasidas.com
+Donate link: http://buy.thulasidas.com/easy-translator
 Tags: plugins, internationalization, translation, translator, localization, i18n, l10n
 Requires at least: 2.8
 Tested up to: 3.4
-Stable tag: 2.06
+Stable tag: 2.10
 
 Easy Translator is a plugin translation tool for authors and translators. (Not a blog page translator!)
 
@@ -18,9 +18,9 @@ Note that *Easy Translator* is **not** a blog page translator for a blogger. It 
 
 == Upgrade Notice ==
 
-= 2.06 =
+= 2.10 =
 
-Taking care of some debug notices from WordPress debug mode.
+Including a support link.
 
 == Screenshots ==
 
@@ -52,6 +52,7 @@ The plugin has a known issue with quotation marks within strings. Some of the qu
 
 = Past =
 
+* V2.10: Including a support link on the admin page. [Sep 30, 2012]
 * V2.06: Taking care of some debug notices from WordPress debug mode. [Aug 28, 2012]
 * V2.05: Minor changes to the admin page. [July 18, 2012]
 * V2.04: Taking care of magic_quotes_gpc in PHP. [May 18, 2012]
