@@ -3,7 +3,7 @@
 Plugin Name: Easy Translator
 Plugin URI: http://www.thulasidas.com/ezTrans
 Description: A plugin to translate other plugins (Yes, any other plugin) Access it by clicking <a href="tools.php?page=easy-translator-lite/easy-translator-lite.php">Tools &rarr; Easy Translator</a>.
-Version: 2.10
+Version: 2.11
 Author: Manoj Thulasidas
 Author URI: http://www.thulasidas.com
 */
@@ -570,7 +570,7 @@ if (class_exists("ezTran")) {
         global $ezTran ;
         if (function_exists('add_submenu_page'))
           add_submenu_page('tools.php','Easy Translator', 'Easy Translator',
-                           "install_plugins", __FILE__, array(&$ezTran, 'printAdminPage'));
+                           "install_plugins", __FILE__, array($ezTran, 'printAdminPage'));
         add_filter('plugin_action_links', array($ezTran, 'plugin_action'), -10, 2);
       }
     }
