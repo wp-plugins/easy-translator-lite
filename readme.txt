@@ -4,7 +4,7 @@ Donate link: http://buy.thulasidas.com/easy-translator
 Tags: plugins, internationalization, translation, translator, localization, i18n, l10n
 Requires at least: 2.8
 Tested up to: 3.4
-Stable tag: 2.11
+Stable tag: 2.12
 
 Easy Translator is a plugin translation tool for authors and translators. (Not a blog page translator!)
 
@@ -18,9 +18,9 @@ Note that *Easy Translator* is **not** a blog page translator for a blogger. It 
 
 == Upgrade Notice ==
 
-= 2.11 =
+= 2.12 =
 
-Bug fixes (Fatal error: Call-time pass-by-reference has been removed).
+Proper use of SESSION variables.
 
 == Screenshots ==
 
@@ -52,6 +52,7 @@ The plugin has a known issue with quotation marks within strings. Some of the qu
 
 = Past =
 
+* V2.12: Proper use of SESSION variables. [Feb 18, 2013]
 * V2.11: Bug fixes (Fatal error: Call-time pass-by-reference has been removed). [Jan 27, 2013]
 * V2.10: Including a support link on the admin page. [Sep 30, 2012]
 * V2.06: Taking care of some debug notices from WordPress debug mode. [Aug 28, 2012]
