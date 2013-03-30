@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: Easy Translator
-Plugin URI: http://www.thulasidas.com/ezTrans
+Plugin URI: http://www.thulasidas.com/easy-translator
 Description: A plugin to translate other plugins (Yes, any other plugin) Access it by clicking <a href="tools.php?page=easy-translator-lite/easy-translator-lite.php">Tools &rarr; Easy Translator</a>.
 Version: 2.12
 Author: Manoj Thulasidas
@@ -27,7 +27,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 define('MINMATCH', 89) ;
 
-if (!class_exists("ezTran") && !class_exists("PO")) {
+if (!class_exists("EasyTranslator") && !class_exists("PO")) {
   class PO { // an id-str pair with attributes
     var $num, $id, $str, $tranId, $tranVal, $keyId, $keyVal ;
 
@@ -90,9 +90,9 @@ if (!class_exists("ezTran") && !class_exists("PO")) {
     }
   }
 
-  class ezTran {
+  class EasyTranslator {
     var $status, $error;
-    function ezTran()
+    function EasyTranslator()
     {
       $this->status = '' ;
       $this->error = '' ;
@@ -119,6 +119,10 @@ if (!class_exists("ezTran") && !class_exists("PO")) {
       if (isset($_POST['ezt-mailPot'])) {
         $this->status = '<div style="background-color:#cff;padding:5px;margin:5px;border: solid 1px;margin-top:10px;">In the <a href="http://buy.thulasidas.com/easy-translator">Pro Version</a>, the Pot file would have been sent to the plugin author. In this Lite version, please download the PO file and email it using your mail client.</div> ' ;
       }
+    }
+
+    function session_start(){
+      if (!session_id()) @session_start() ;
     }
 
     // Return the contents of all PHP files in the dir specified
@@ -558,10 +562,10 @@ Enter the translated strings in the text boxes below and hit the "Display POT Fi
       return $links;
     }
   }
-} // End Class ezTran
+} // End Class EasyTranslator
 
-if (class_exists("ezTran")) {
-  $ezTran = new ezTran();
+if (class_exists("EasyTranslator")) {
+  $ezTran = new EasyTranslator();
   if (isset($ezTran)) {
     // Add it to the Tools Menu
     if (!function_exists("ezTran_ap")) {
@@ -574,7 +578,7 @@ if (class_exists("ezTran")) {
       }
     }
     add_action('admin_menu', 'ezTran_ap');
-    if (!session_id()) add_action('init', 'session_start') ;
+    add_action('init',  array($ezTran, 'session_start')) ;
   }
 }
 ?>
