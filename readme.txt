@@ -3,14 +3,16 @@ Contributors: manojtd
 Donate link: http://buy.thulasidas.com/easy-translator
 Tags: plugins, internationalization, translation, translator, localization, i18n, l10n
 Requires at least: 2.8
-Tested up to: 3.4
-Stable tag: 2.13
+Tested up to: 3.5
+Stable tag: 3.00
 
-Easy Translator is a plugin translation tool for authors and translators. (Not a blog page translator!)
+Easy Translator is a machine translator for blog posts and a plugin translation tool for developers and translators.
 
 == Description ==
 
-*Easy Translator* is a plugin to translate other plugins. It picks up translatable strings (in `_[_e]()` functions) and presents them and their existing translations (from the MO object of the current text-domain, if loaded) in a user editable form. It can generate a valid PO file that can be emailed to the plugin author. The [Pro Version](http://buy.thulasidas.com/easy-translator "Buy the Pro Version for $1.95") lets your translators email the PO file directly from the its window, streamlining their work. (Not a big deal really because you can always save the PO file and email it yourself. Still...)
+*Easy Translator* is a plugin to translate other plugins as well as blog posts and pages. It provides a customizable widget to enable machine translation (from Google or Microsoft). For plugins, it picks up translatable strings (in `_[_e]()` functions) and presents them and their existing translations (from the MO object of the current text-domain, if loaded) in a user editable form. It can generate a valid PO file that can be emailed to the plugin author.
+
+The [Pro Version](http://buy.thulasidas.com/easy-translator "Buy the Pro Version for $3.95") adds machine translation help to seed your plugin translation efforts. That is, for each translatable string found, it will give you a translation as provided by Google, which you can edit and perfect. It also lets your translators email the PO file directly from the its window, streamlining their work. For the blog post translation widget, the Pro version lets you customize your colors using a color picker.
 
 If you are a plugin author interested in internationalizing your plugins, you may want to ask your potential translators to install *Easy Translator* to make it a snap to give you translations. If you want to clean up your internationalization, you will appreciate *Easy Translator* because it does a fuzzy string matching to highlight possible repetitions and conflicts among key strings.
 
@@ -18,9 +20,9 @@ Note that *Easy Translator* is **not** a blog page translator for a blogger. It 
 
 == Upgrade Notice ==
 
-= 2.13 =
+= 3.00 =
 
-Proper session initialization.
+Major upgrade with blog page translation as well as Google translate to seed plugin translation.
 
 == Screenshots ==
 
@@ -42,7 +44,7 @@ Proper session initialization.
 
 = This plugin conflicts with other plugins. What to do now? =
 
-*Easy Translator* uses the PHP "super-global" variables (`$_SESSION[]`) to hold various strings and settings between your visits so that your translation work is not accidentally erased. I hope to have implemented it safely. But as any developer will tell you, there is nothing safe about using globals. If you find anything amiss, I'd appreciate it if you could let me know. Please post it in [the forum](http://wordpress.org/tags/easy-translator-lite "Easy Translator Forum") or [email me](http://manoj.thulasidas.com/mail.shtml "Contact Manoj").
+*Easy Translator* uses the PHP "super-global" variables (`$_SESSION[]`) to hold various strings and settings between your visits so that your translation work is not accidentally erased. I hope to have implemented it safely. But as any developer will tell you, there is nothing safe about using globals. If you find anything amiss, I'd appreciate it if you could let me know. Please post it in [the forum](http://wordpress.org/tags/easy-translator-lite "Easy Translator Forum") or [email me](http://support.thulasidas.com/ "Contact Manoj").
 
 = The PO files created generate errors when I run `msgfmt` on them. What are these errors? =
 
@@ -52,6 +54,7 @@ The plugin has a known issue with quotation marks within strings. Some of the qu
 
 = Past =
 
+* V3.00: Major upgrade with blog page translation as well as Google translate to seed plugin translation. [May 20, 2013]
 * V2.13: Proper session initialization. [Mar 30, 2013]
 * V2.12: Proper use of SESSION variables. [Feb 18, 2013]
 * V2.11: Bug fixes (Fatal error: Call-time pass-by-reference has been removed). [Jan 27, 2013]

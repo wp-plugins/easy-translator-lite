@@ -3,7 +3,7 @@
 Plugin Name: Easy Translator
 Plugin URI: http://www.thulasidas.com/easy-translator
 Description: A plugin to translate other plugins (Yes, any other plugin) Access it by clicking <a href="tools.php?page=easy-translator-lite/easy-translator-lite.php">Tools &rarr; Easy Translator</a>.
-Version: 2.12
+Version: 3.00
 Author: Manoj Thulasidas
 Author URI: http://www.thulasidas.com
 */
@@ -94,6 +94,7 @@ if (!class_exists("EasyTranslator") && !class_exists("PO")) {
     var $status, $error;
     function EasyTranslator()
     {
+      $this->session_start();
       $this->status = '' ;
       $this->error = '' ;
 
@@ -562,6 +563,71 @@ Enter the translated strings in the text boxes below and hit the "Display POT Fi
       return $links;
     }
   }
+
+  class EzTransWidget extends WP_Widget {
+    function EzTransWidget() {
+      parent::WP_Widget(false, $name = 'Easy Translator Lite');
+    }
+
+    function widget($args, $instance) {
+      extract( $args );
+      $title = apply_filters('widget_title', $instance['title']);
+      $translator = $instance['translator'];
+      switch ($translator) {
+        case "ms":
+          $translator = "<div id='MicrosoftTranslatorWidget' style='width: 200px; min-height: 83px; border-color: #404040; background-color: #A0A0A0;'><noscript><a href='http://www.microsofttranslator.com/bv.aspx?a=http%3a%2f%2fwww.thulasidas.com%2fplugins%2f$plgName'>Translate this page</a><br />Powered by <a href='http://www.bing.com/translator'>Microsoft® Translator</a></noscript></div> <script type='text/javascript'> /* <![CDATA[ */ setTimeout(function() { var s = document.createElement('script'); s.type = 'text/javascript'; s.charset = 'UTF-8'; s.src = ((location && location.href && location.href.indexOf('https') == 0) ? 'https://ssl.microsofttranslator.com' : 'http://www.microsofttranslator.com' ) + '/ajax/v2/widget.aspx?mode=manual&from=en&layout=ts'; var p = document.getElementsByTagName('head')[0] || document.documentElement; p.insertBefore(s, p.firstChild); }, 0); /* ]]> */ </script>";
+          break;
+        case "gg":
+          $translator = "<span id='google_translate_element'></span><script type='text/javascript'>
+function googleTranslateElementInit() {
+  new google.translate.TranslateElement({pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
+}
+</script><script type='text/javascript' src='//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit'></script>";
+          break;
+        default:
+          $translator = "Please select a translator.";
+      }
+      echo $before_widget;
+      if ( $title )
+        echo $before_title . $title . $after_title;
+      echo  $translator;
+      echo $after_widget;
+    }
+
+    function update($new_instance, $old_instance) {
+      $instance = array();
+      $instance['title'] = strip_tags($new_instance['title']);
+      $instance['translator'] = strip_tags($new_instance['translator']);
+      return $instance;
+    }
+
+    function form($instance) {
+      $title = esc_attr($instance['title']);
+      $titleId = $this->get_field_id('title');
+      $titleName = $this->get_field_name( 'title' );
+      $translator = esc_attr($instance['translator']);
+      $translatorMs = $this->get_field_id('ms');
+      $translatorGoogle = $this->get_field_id('gg');
+      $translatorName = $this->get_field_name( 'translator' );
+      if ($translator == "ms") $msChecked="checked='checked'";
+      else $msChecked = "";
+      if ($translator == "gg") $ggChecked="checked='checked'";
+      else $ggChecked = "";
+      echo <<<EOF
+<p>
+<label for="">Title: </label>
+<input  id="$titleId" name="$titleName" type="text" value="{$title}" />
+</p>
+<p>
+<label for="translatorName">Translator:<br />
+<input id="$translatorMs" name="$translatorName" type="radio" value="ms" $msChecked/>&nbsp; Microsoft<sup>&reg;</sup><br />
+<input id="$translatorGoogle" name="$translatorName" type="radio" value="gg" $ggChecked/>&nbsp; Google<sup>&reg;</sup></br>
+</label>
+</p>
+EOF;
+    }
+  } // end EzTransWidget
+
 } // End Class EasyTranslator
 
 if (class_exists("EasyTranslator")) {
@@ -572,13 +638,15 @@ if (class_exists("EasyTranslator")) {
       function ezTran_ap() {
         global $ezTran ;
         if (function_exists('add_submenu_page'))
-          add_submenu_page('tools.php','Easy Translator', 'Easy Translator',
+          add_submenu_page('tools.php', 'Easy Translator Lite', 'Easy Translator Lite',
                            "install_plugins", __FILE__, array($ezTran, 'printAdminPage'));
         add_filter('plugin_action_links', array($ezTran, 'plugin_action'), -10, 2);
       }
     }
     add_action('admin_menu', 'ezTran_ap');
-    add_action('init',  array($ezTran, 'session_start')) ;
+    add_action('init', array($ezTran, 'session_start')) ;
+    add_action('widgets_init',
+      create_function('', 'return register_widget("EzTransWidget");'));
   }
 }
 ?>
