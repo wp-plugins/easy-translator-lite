@@ -4,7 +4,7 @@ Donate link: http://buy.thulasidas.com/easy-translator
 Tags: plugins, internationalization, translation, translator, localization, i18n, l10n
 Requires at least: 2.8
 Tested up to: 3.5
-Stable tag: 3.00
+Stable tag: 3.01
 
 Easy Translator is a machine translator for blog posts and a plugin translation tool for developers and translators.
 
@@ -16,13 +16,13 @@ The [Pro Version](http://buy.thulasidas.com/easy-translator "Buy the Pro Version
 
 If you are a plugin author interested in internationalizing your plugins, you may want to ask your potential translators to install *Easy Translator* to make it a snap to give you translations. If you want to clean up your internationalization, you will appreciate *Easy Translator* because it does a fuzzy string matching to highlight possible repetitions and conflicts among key strings.
 
-Note that *Easy Translator* is **not** a blog page translator for a blogger. It is a tool for plugin authors and the kind international users who put in their time and effort to translate plugins. If you fall in that category, please it a go.
+Note that *Easy Translator* is now a blog page translator for a blogger, although it was originally written as a tool for plugin authors and the kind international users who put in their time and effort to translate plugins.
 
 == Upgrade Notice ==
 
-= 3.00 =
+= 3.01 =
 
-Major upgrade with blog page translation as well as Google translate to seed plugin translation.
+Documentation changes only.
 
 == Screenshots ==
 
@@ -40,11 +40,13 @@ Major upgrade with blog page translation as well as Google translate to seed plu
 
 = Looks good, but doesn't work! =
 
-*Easy Translator* is a fairly complicated program, and it is in its infancy. If you find a bug or anything that doesn't work as expected, please do not keep it to youself. Please post it in [the forum](http://wordpress.org/tags/easy-translator-lite "Easy Translator Forum") or [email me](http://manoj.thulasidas.com/mail.shtml "Contact Manoj"). I really would like to make it work perfectly.
+*Easy Translator* is a fairly complicated program. If you find a bug or anything that doesn't work as expected, please do not keep it to youself. Please post it in [the forum](http://wordpress.org/tags/easy-translator-lite "Easy Translator Forum") or [email me](http://support.thulasidas.com/ "Contact Manoj"). I really would like to make it work perfectly.
 
 = This plugin conflicts with other plugins. What to do now? =
 
-*Easy Translator* uses the PHP "super-global" variables (`$_SESSION[]`) to hold various strings and settings between your visits so that your translation work is not accidentally erased. I hope to have implemented it safely. But as any developer will tell you, there is nothing safe about using globals. If you find anything amiss, I'd appreciate it if you could let me know. Please post it in [the forum](http://wordpress.org/tags/easy-translator-lite "Easy Translator Forum") or [email me](http://support.thulasidas.com/ "Contact Manoj").
+*Easy Translator* uses the PHP "super-global" variables (`$_SESSION[]`) to hold various strings and settings between your visits so that your translation work is not accidentally erased. I hope to have implemented it safely. But as any developer will tell you, there is nothing safe about using globals. If you find anything amiss, I'd appreciate it if you could let me know. Please post it in [the forum](http://wordpress.org/tags/easy-translator-lite "Easy Translator Forum") or [contact me](http://support.thulasidas.com/ "Contact Manoj").
+
+**If you have a question or comment about the Pro version, please do not use the forum hosted at WordPress.org, but [contact the plugin author](http://support.thulasidas.com/ "Contact Manoj") using our support portal.**
 
 = The PO files created generate errors when I run `msgfmt` on them. What are these errors? =
 
@@ -54,6 +56,7 @@ The plugin has a known issue with quotation marks within strings. Some of the qu
 
 = Past =
 
+* V3.01: Documentation changes only. [May 21, 2013]
 * V3.00: Major upgrade with blog page translation as well as Google translate to seed plugin translation. [May 20, 2013]
 * V2.13: Proper session initialization. [Mar 30, 2013]
 * V2.12: Proper use of SESSION variables. [Feb 18, 2013]
