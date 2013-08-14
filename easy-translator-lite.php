@@ -2,8 +2,8 @@
 /*
 Plugin Name: Easy Translator
 Plugin URI: http://www.thulasidas.com/easy-translator
-Description: A plugin to translate other plugins (Yes, any other plugin) Access it by clicking <a href="tools.php?page=easy-translator-lite/easy-translator-lite.php">Tools &rarr; Easy Translator</a>.
-Version: 3.01
+Description: A plugin to translate other plugins (Yes, any other plugin) and blog pages. Access it by clicking <a href="tools.php?page=easy-translator-lite/easy-translator-lite.php">Tools &rarr; Easy Translator</a>.
+Version: 3.10
 Author: Manoj Thulasidas
 Author URI: http://www.thulasidas.com
 */
@@ -344,7 +344,7 @@ msgstr ""
 
       echo $selPlugin ;
       echo '<input type="hidden" name="ezt-name" value="'.$plugin_name.'" />';
-      $loadPlugin = '&nbsp; <input type="submit" style="width:10%" name="ezt-load" value="Load it" /> <br />' .
+      $loadPlugin = '&nbsp; <input type="submit" style="width:10%" name="ezt-load" value="Load it" title="Looks for all the MO files of the selected plugin" /> <br />' .
         "\n"  ;
       echo $loadPlugin ;
 
@@ -363,9 +363,10 @@ msgstr ""
         return ;
       }
 
-      $textDomain = '<div style="width: 15%; float:left">Text Domain:</div>' .
+      $textDomain = '<div style="width: 15%; float:left" title="Enter the text-domain used by this plugin -- usually plugin-name">Text Domain:</div>' .
         '<input type="text" style="width: 40%" name="ezt-domain" ' .
-        'id="domain" value="' . $domain . '" /><br />' . "\n" ;
+        'id="domain" value="' . $domain .
+        '" title="Enter the text-domain used by this plugin -- usually plugin-name" /><br />' . "\n" ;
 
       echo $textDomain ;
 
@@ -397,13 +398,13 @@ msgstr ""
       $mosel .= '</select>' ;
       echo $mosel ;
 
-      $loadmo = '&nbsp; <input type="submit" style="width:10%" name="ezt-loadmo" value="Load MO" />' .
+      $loadmo = '&nbsp; <input type="submit" style="width:10%" name="ezt-loadmo" value="Load MO" title="Loads the translations from the selected file and matches them with the translatable strings in the plugin" />' .
         "<br />\n" ;
       echo $loadmo;
 
-      $newmo = '<div style="width: 15%; float:left">Or Create New MO:</div>' .
-        "<input type='text' name='ezt-newmo' style='width:40%' value=$locale>" .
-        '&nbsp; <input type="submit" style="width:10%" name="ezt-loadnewmo" value="Create MO" />' .
+      $newmo = '<div style="width: 15%; float:left" title="Create a new PO file for this plugin with the language code specified here">Or Create New MO:</div>' .
+        "<input type='text' name='ezt-newmo' style='width:40%' title='Create a new PO file for this plugin with the language code specified here' value=$locale>" .
+        '&nbsp; <input type="submit" style="width:10%" name="ezt-loadnewmo" value="Create MO" title="Create a new PO file for this plugin with the language code specified here" />' .
         "<br /><br />\n" ;
 
       echo $newmo ;

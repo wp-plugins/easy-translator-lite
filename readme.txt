@@ -3,8 +3,8 @@ Contributors: manojtd
 Donate link: http://buy.thulasidas.com/easy-translator
 Tags: plugins, internationalization, translation, translator, localization, i18n, l10n
 Requires at least: 2.8
-Tested up to: 3.5
-Stable tag: 3.01
+Tested up to: 3.6
+Stable tag: 3.10
 
 Easy Translator is a machine translator for blog posts and a plugin translation tool for developers and translators.
 
@@ -20,9 +20,9 @@ Note that *Easy Translator* is now a blog page translator for a blogger, althoug
 
 == Upgrade Notice ==
 
-= 3.01 =
+= 3.10 =
 
-Documentation changes only.
+Compatibility with WP3.6. Some additional tooltips to help the user.
 
 == Screenshots ==
 
@@ -56,6 +56,7 @@ The plugin has a known issue with quotation marks within strings. Some of the qu
 
 = Past =
 
+* V3.10: Compatibility with WP3.6. Some additional tooltips to help the user. [Aug 15, 2013]
 * V3.01: Documentation changes only. [May 21, 2013]
 * V3.00: Major upgrade with blog page translation as well as Google translate to seed plugin translation. [May 20, 2013]
 * V2.13: Proper session initialization. [Mar 30, 2013]
