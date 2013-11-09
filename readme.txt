@@ -3,8 +3,8 @@ Contributors: manojtd
 Donate link: http://buy.thulasidas.com/easy-translator
 Tags: plugins, internationalization, translation, translator, localization, i18n, l10n
 Requires at least: 2.8
-Tested up to: 3.6
-Stable tag: 3.10
+Tested up to: 3.7
+Stable tag: 3.20
 
 Easy Translator is a machine translator for blog posts and a plugin translation tool for developers and translators.
 
@@ -12,7 +12,12 @@ Easy Translator is a machine translator for blog posts and a plugin translation 
 
 *Easy Translator* is a plugin to translate other plugins as well as blog posts and pages. It provides a customizable widget to enable machine translation (from Google or Microsoft). For plugins, it picks up translatable strings (in `_[_e]()` functions) and presents them and their existing translations (from the MO object of the current text-domain, if loaded) in a user editable form. It can generate a valid PO file that can be emailed to the plugin author.
 
-The [Pro Version](http://buy.thulasidas.com/easy-translator "Buy the Pro Version for $3.95") adds machine translation help to seed your plugin translation efforts. That is, for each translatable string found, it will give you a translation as provided by Google, which you can edit and perfect. It also lets your translators email the PO file directly from the its window, streamlining their work. For the blog post translation widget, the Pro version lets you customize your colors using a color picker.
+The [Pro Version](http://buy.thulasidas.com/easy-translator "Buy the Pro Version for $3.95") adds the following features:
+
+1. Machine translation help to seed your plugin translation efforts. That is, for each translatable string found, it will give you a translation as provided by Google, which you can edit and perfect.
+2. Auto identification of the text-domain used by the plugin being translated.
+3. Email support so that your translators can send the PO file directly from the its window, streamlining their work.
+4. Color-pickers for the blog post translation widget, to customize and match your colors with your theme.
 
 If you are a plugin author interested in internationalizing your plugins, you may want to ask your potential translators to install *Easy Translator* to make it a snap to give you translations. If you want to clean up your internationalization, you will appreciate *Easy Translator* because it does a fuzzy string matching to highlight possible repetitions and conflicts among key strings.
 
@@ -20,9 +25,9 @@ Note that *Easy Translator* is now a blog page translator for a blogger, althoug
 
 == Upgrade Notice ==
 
-= 3.10 =
+= 3.20 =
 
-Compatibility with WP3.6. Some additional tooltips to help the user.
+Compatibility with WP3.7. Some minor documentation changes.
 
 == Screenshots ==
 
@@ -56,6 +61,7 @@ The plugin has a known issue with quotation marks within strings. Some of the qu
 
 = Past =
 
+* V3.20: Compatibility with WP3.7. Some minor documentation changes. [Nov 9, 2013]
 * V3.10: Compatibility with WP3.6. Some additional tooltips to help the user. [Aug 15, 2013]
 * V3.01: Documentation changes only. [May 21, 2013]
 * V3.00: Major upgrade with blog page translation as well as Google translate to seed plugin translation. [May 20, 2013]
