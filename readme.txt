@@ -10,7 +10,7 @@ Easy Translator is a machine translator for blog posts and a plugin translation 
 
 == Description ==
 
-*Easy Translator* is a plugin to translate other plugins as well as blog posts and pages. It provides a customizable widget to enable machine translation (from Google or Microsoft). For plugins, it picks up translatable strings (in `_[_e]()` functions) and presents them and their existing translations (from the MO object of the current text-domain, if loaded) in a user editable form. It can generate a valid PO file that can be emailed to the plugin author.
+*Easy Translator* is a plugin to translate other plugins as well as blog posts and pages. It provides a customizable widget to enable machine translation (from Google or Microsoft). For plugin translation, it picks up translatable strings (in `_[_e]()` functions) and presents them and their existing translations (from the MO object of the current text-domain, if loaded) in a user editable form. It can generate a valid PO file that can be emailed to the plugin author.
 
 The [Pro Version](http://buy.thulasidas.com/easy-translator "Buy the Pro Version for $3.95") adds the following features:
 
