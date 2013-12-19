@@ -3,7 +3,7 @@
 Plugin Name: Easy Translator
 Plugin URI: http://www.thulasidas.com/easy-translator
 Description: A plugin to translate other plugins (Yes, any other plugin) and blog pages. Access it by clicking <a href="tools.php?page=easy-translator-lite/easy-translator-lite.php">Tools &rarr; Easy Translator</a>.
-Version: 3.20
+Version: 3.30
 Author: Manoj Thulasidas
 Author URI: http://www.thulasidas.com
 */
@@ -24,6 +24,10 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
+
+if (class_exists("EasyTranslator")) {
+    die ("<strong><em>Easy Translator Pro</em></strong> seems to be active.<br />Please deactivate it before activating <strong><em>Easy Translator Lite</em></strong>.");
+}
 
 define('MINMATCH', 89) ;
 
@@ -273,9 +277,10 @@ msgstr ""
         '/' . PLUGINDIR . '/' .  basename(dirname(__FILE__)) .
         '/wz_tooltip.js"></script>' . "\n" ;
 ?>
-<div class="wrap" style="width:900px">
-<form method="post" action="<?php echo $_SERVER["REQUEST_URI"]; ?>">
+<div class="wrap" style="width:1000px">
 <h2>Easy Translator</h2>
+
+<form method="post" action="">
 
 <?php
       @include(dirname (__FILE__).'/myPlugins.php');
@@ -297,13 +302,13 @@ msgstr ""
       $plugin = '' ;
       if (!empty($_SESSION['ezt-plugin'] )) $plugin = $_SESSION['ezt-plugin'] ;
 
-      if (isset($_POST['ezt-loadmo']) || isset($_POST['ezt-loadnewmo'])){
+      if (isset($_POST['ezt-loadmo']) || isset($_POST['ezt-createpo'])){
         $name = $_POST['ezt-name'];
         $_SESSION['ezt-name'] = $name ;
         $plgdir = realpath(dirname(__FILE__) . '/../' . dirname($plugin)) ;
         $_SESSION['ezt-plgdir'] = $plgdir ;
-        if (isset($_POST['ezt-loadnewmo'])){
-          $mofile = $_POST['ezt-newmo'] ;
+        if (isset($_POST['ezt-createpo'])){
+          $mofile = $_POST['ezt-newpo'] ;
           $moname = $mofile ;
         }
         else {
@@ -329,7 +334,7 @@ msgstr ""
 
       $plugins = get_plugins() ;
       $plugin_name = '';
-      $selPlugin = '<div style="width: 15%; float:left">Select Plugin:</div>' .
+      $selPlugin = '<div style="" onmouseover = "Tip(\'Hover over any of the labels below (like Select Plugin, for instance) for quick help.\',WIDTH, 300)" onmouseout="UnTip()"><h3>Input Selection</h3>[Hover over label for quick help.]<br /><br /></div><div style="width: 15%; float:left" onmouseover = "Tip(\'Select one of your plugins to get started.\',WIDTH, 300)" onmouseout="UnTip()">Select Plugin:</div>' .
         '<select style="width: 40%" name="ezt-plugin">';
       foreach ($plugins as $k => $v) {
         if ($k == $plugin) {
@@ -344,7 +349,7 @@ msgstr ""
 
       echo $selPlugin ;
       echo '<input type="hidden" name="ezt-name" value="'.$plugin_name.'" />';
-      $loadPlugin = '&nbsp; <input type="submit" style="width:10%" name="ezt-load" value="Load it" title="Looks for all the MO files of the selected plugin" /> <br />' .
+      $loadPlugin = '&nbsp; <input type="submit" style="width:10%" name="ezt-load" value="Load it" title="Looks for all the MO files of the selected plugin" onmouseover = "Tip(\'Looks for all language (MO) files of the selected plugin\',WIDTH, 300)" onmouseout="UnTip()"/> <br /><br />' .
         "\n"  ;
       echo $loadPlugin ;
 
@@ -363,7 +368,7 @@ msgstr ""
         return ;
       }
 
-      $textDomain = '<div style="width: 15%; float:left" title="Enter the text-domain used by this plugin -- usually plugin-name">Text Domain:</div>' .
+      $textDomain = '<div style="width: 15%; float:left" title="Enter the text-domain used by this plugin -- usually plugin-name" onmouseover = "Tip(\'Enter the text-domain used by this plugin -- usually plugin-name. Use the PRO version to auto-detect Text Domains.\',WIDTH, 300)" onmouseout="UnTip()">Text Domain:</div>' .
         '<input type="text" style="width: 40%" name="ezt-domain" ' .
         'id="domain" value="' . $domain .
         '" title="Enter the text-domain used by this plugin -- usually plugin-name" /><br />' . "\n" ;
@@ -386,7 +391,7 @@ msgstr ""
       if (!empty($_SESSION['ezt-moname'])) $moname = $_SESSION['ezt-moname'] ;
 
       $mofiles = $this->rglob( '/*.mo', 0, $plgdir) ;
-      $mosel = '<div style="width: 15%; float:left">MO File:</div>' .
+      $mosel = '<div style="width: 15%; float:left" onmouseover = "Tip(\'These are the language files found for this plugin. Select one of them to get started. Or create a new language (PO) file below.\',WIDTH, 300)" onmouseout="UnTip()">Language File:</div>' .
         '<select style="width: 40%" name="ezt-mofile">';
       foreach ($mofiles as $k => $v) {
         $realv = realpath($v) ;
@@ -398,19 +403,20 @@ msgstr ""
       $mosel .= '</select>' ;
       echo $mosel ;
 
-      $loadmo = '&nbsp; <input type="submit" style="width:10%" name="ezt-loadmo" value="Load MO" title="Loads the translations from the selected file and matches them with the translatable strings in the plugin" />' .
-        "<br />\n" ;
+      $loadmo = '&nbsp; <input type="submit" style="width:10%" name="ezt-loadmo" value="Load MO" title="Loads the translations from the selected file and matches them with the translatable strings in the plugin" onmouseover = "Tip(\'Loads the translations from the selected file and matches them with the translatable strings in the plugin. For the strings with no translations, Google translator will be invoked to give you a machine translation.\',WIDTH, 300)" onmouseout="UnTip()" />' .
+        "<br /><br />\n" ;
       echo $loadmo;
 
-      $newmo = '<div style="width: 15%; float:left" title="Create a new PO file for this plugin with the language code specified here">Or Create New MO:</div>' .
-        "<input type='text' name='ezt-newmo' style='width:40%' title='Create a new PO file for this plugin with the language code specified here' value=$locale>" .
-        '&nbsp; <input type="submit" style="width:10%" name="ezt-loadnewmo" value="Create MO" title="Create a new PO file for this plugin with the language code specified here" />' .
+      $tit = 'title="Create a new language (PO) file for this plugin with the language code specified here" onmouseover = "Tip(\'Create a new language (PO) file for this plugin with the language code specified here\',WIDTH, 300)" onmouseout="UnTip()" ';
+      $newpo = '<div style="width: 15%; float:left" ' . $tit . ' >Or Create New PO:</div>' .
+        "<input type='text' name='ezt-newpo' style='width:40%' ' . $tit . 'value=$locale>" .
+        '&nbsp; <input type="submit" style="width:10%" name="ezt-createpo" value="Create PO" ' . $tit . ' />' .
         "<br /><br />\n" ;
 
-      echo $newmo ;
+      echo $newpo ;
 
       if (strlen($mofile) <= 0 || strlen($moname) <= 0) {
-        echo $this->errMsg('Please select and load an MO file', 'updated') ;
+        echo $this->errMsg('Please select and load a language file. Or create a new PO (language) file for this plugin.', 'updated') ;
         return ;
       }
 
@@ -567,7 +573,9 @@ Enter the translated strings in the text boxes below and hit the "Display POT Fi
 
   class EzTransWidget extends WP_Widget {
     function EzTransWidget() {
-      parent::WP_Widget(false, $name = 'Easy Translator Lite');
+      $widgetOps = array('description' =>
+          'Translate Blog posts and pages using Easy Translator Lite.');
+      parent::WP_Widget(false, $name = 'Easy Translator Lite', $widgetOps);
     }
 
     function widget($args, $instance) {
@@ -650,4 +658,3 @@ if (class_exists("EasyTranslator")) {
       create_function('', 'return register_widget("EzTransWidget");'));
   }
 }
-?>

@@ -3,8 +3,8 @@ Contributors: manojtd
 Donate link: http://buy.thulasidas.com/easy-translator
 Tags: plugins, internationalization, translation, translator, localization, i18n, l10n
 Requires at least: 2.8
-Tested up to: 3.7
-Stable tag: 3.20
+Tested up to: 3.8
+Stable tag: 3.30
 
 Easy Translator is a machine translator for blog posts and a plugin translation tool for developers and translators.
 
@@ -25,9 +25,9 @@ Note that *Easy Translator* is now a blog page translator for a blogger, althoug
 
 == Upgrade Notice ==
 
-= 3.20 =
+= 3.30 =
 
-Compatibility with WP3.7. Some minor documentation changes.
+Compatibility with WP3.8. Documentation changes.
 
 == Screenshots ==
 
@@ -57,10 +57,15 @@ Compatibility with WP3.7. Some minor documentation changes.
 
 The plugin has a known issue with quotation marks within strings. Some of the quotations marks don't get escaped with a backslash. I think this issue is locale-specific, and don't know how to solve it. If you have any ideas, please let me know. The workaround is to edit the generated PO files with a text editor and go to the lines that give you errors in `msgfmt`. You will most likely find some unescaped quotes that you should prepend a backslash to. It should then go through `msgfmt` without error. Another known problem is that in some locales, the `\n` character in the first few lines appear as `n` -- again in a locale-specific way.
 
+= How do I get it to translate my blog pages/posts? =
+
+To enable blog page/post translation, find the Easy Translator widget (under the Appearance -> Widgets menu on your WordPress admin page) and drop it on a sidebar. If you have the Pro version of the plugin, you can tweak the colors of the widget to match your theme.
+
 == Change Log ==
 
 = Past =
 
+* V3.30: Compatibility with WP3.8. Documentation changes. [Dec 19, 2013]
 * V3.20: Compatibility with WP3.7. Some minor documentation changes. [Nov 9, 2013]
 * V3.10: Compatibility with WP3.6. Some additional tooltips to help the user. [Aug 15, 2013]
 * V3.01: Documentation changes only. [May 21, 2013]
