@@ -389,7 +389,7 @@ EOF;
           }
         }
         else {
-          $this->status = '<div style="background-color:#cff;padding:5px;margin:5px;border:solid 1px;margin-top:10px;font-weight:bold;color:red">In the <a href="http://buy.thulasidas.com/easy-translator">Pro Version</a>, the Pot file would have been sent to the plugin author.<br />In this Lite version, please download the PO file (using the Display &amp; Save POT File" button) and email it using your mail client.</div><br />';
+          $this->status = '<div style="background-color:#cff;padding:5px;margin:5px;border:solid 1px;margin-top:10px;font-weight:bold;color:red">In the <a href="http://buy.thulasidas.com/easy-translator">Pro Version</a>, the Pot file would have been sent to the plugin author.<br />In this Lite version, please download the PO file (using the "Display &amp; Save POT File" button above) and email it using your mail client.</div><br />';
         }
         return $adminNeeded;
       }

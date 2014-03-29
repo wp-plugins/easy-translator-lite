@@ -3,7 +3,7 @@
 Plugin Name: Easy Translator
 Plugin URI: http://www.thulasidas.com/easy-translator
 Description: A plugin to translate other plugins (Yes, any other plugin) and blog pages. Access it by clicking <a href="tools.php?page=easy-translator-lite/easy-translator-lite.php">Tools &rarr; Easy Translator</a>.
-Version: 4.00
+Version: 4.01
 Author: Manoj Thulasidas
 Author URI: http://www.thulasidas.com
 */
@@ -442,11 +442,6 @@ function googleTranslateElementInit() {
       }
 
       echo <<<EOF
-<script type='text/javascript'>
-    jQuery(document).ready(function($) {
-        $('.colorPicker').wpColorPicker();
-    }, jQuery);
-</script>
 <p>
 <label for="">Title: </label>
 <input id="$titleId" name="$titleName" type="text" value="{$title}" />
