@@ -3,7 +3,7 @@
 Plugin Name: Easy Translator
 Plugin URI: http://www.thulasidas.com/easy-translator
 Description: A plugin to translate other plugins (Yes, any other plugin) and blog pages. Access it by clicking <a href="tools.php?page=easy-translator-lite/easy-translator-lite.php">Tools &rarr; Easy Translator</a>.
-Version: 4.02
+Version: 4.03
 Author: Manoj Thulasidas
 Author URI: http://www.thulasidas.com
 */
@@ -62,14 +62,16 @@ if (!class_exists("EasyTranslator")) {
       return $s;
     }
 
-
     // Recursively finds all the MO files under a dir
     function findFiles($folder, $extensions = array('mo')) {
 
       function glob_recursive($folder, &$folders = array()) {
-        foreach (glob($folder, GLOB_ONLYDIR | GLOB_NOSORT) as $folder) {
-          $folders[] = $folder;
-          glob_recursive("{$folder}/*", $folders);
+        $dirs = glob($folder, GLOB_ONLYDIR | GLOB_NOSORT);
+        if (!empty($dirs)) {
+          foreach ($dirs as $folder) {
+            $folders[] = $folder;
+            glob_recursive("{$folder}/*", $folders);
+          }
         }
       }
 
@@ -147,9 +149,8 @@ if (!class_exists("EasyTranslator")) {
         $this->eztPlgSlug = $_POST['ezt-plugin'];
         $this->eztPlgDir = ABSPATH . PLUGINDIR . "/" . dirname($this->eztPlgSlug);
         $contents = $this->ezTran->getFileContents($this->eztPlgDir);
-        preg_match_all("#_[_e]\s*\([\'\"].+[\'\"]\s*(,\s*[\'\"](.+)[\'\"]|)\s*\)#U", $contents, $domainMatches);
-
-        $this->eztAllDomains = array_count_values($domainMatches[2]);
+        EzTran::getStrings($contents, $keys, $domains);
+        $this->eztAllDomains = array_count_values($domains);
         asort($this->eztAllDomains);
         $this->eztAllDomains = array_reverse($this->eztAllDomains, true);
         if (!empty($this->eztAllDomains)) {
@@ -310,11 +311,8 @@ EOF;
           If you are satisfied with how well it works, why not <a href='http://wordpress.org/extend/plugins/easy-translator-lite/' onclick="popupwindow('http://wordpress.org/extend/plugins/easy-translator-lite/', 'Rate it', 1024, 768); return false;">rate it</a>
           and <a href='http://wordpress.org/extend/plugins/easy-translator-lite/' onclick="popupwindow('http://wordpress.org/extend/plugins/easy-translator-lite/', 'Rate it', 1024, 768); return false;">recommend it</a> to others? :-)
         </p></div>
-      <div style="background-color:#fcf;padding:5px;border: solid 1px;margin:5px;">
-      <?php $ez->renderSupport(); ?>
-      </div>
-
       <?php
+      $ez->renderSupport();
       include ("{$this->plgDir}/tail-text.php");
       ?>
       <table class="form-table" >
