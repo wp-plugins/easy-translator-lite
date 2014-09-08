@@ -3,7 +3,7 @@
 Plugin Name: Easy Translator
 Plugin URI: http://www.thulasidas.com/easy-translator
 Description: A plugin to translate other plugins (Yes, any other plugin) and blog pages. Access it by clicking <a href="tools.php?page=easy-translator-lite/easy-translator-lite.php">Tools &rarr; Easy Translator</a>.
-Version: 4.10
+Version: 4.20
 Author: Manoj Thulasidas
 Author URI: http://www.thulasidas.com
 */
@@ -176,6 +176,7 @@ if (!class_exists("EasyTranslator")) {
         }
         else {
           $this->eztMoFile = realpath($_POST['ezt-mofile']);
+          $this->eztDomain = $_POST['ezt-domain'];
           if (!empty($_POST['ezt-locale'])) {
             $this->eztLocale = $_POST['ezt-locale'];
           }
@@ -183,7 +184,7 @@ if (!class_exists("EasyTranslator")) {
             $this->eztLocale = $this->ezTran->locale;
           }
         }
-        $this->putSessionVars(array('eztPoName', 'eztMoFile', 'eztLocale'));
+        $this->putSessionVars(array('eztPoName', 'eztMoFile', 'eztLocale', 'eztDomain'));
         $_POST['eztran'] = 'eztran';
       }
       $this->getSessionVars();
@@ -209,6 +210,8 @@ if (!class_exists("EasyTranslator")) {
       wp_nonce_field('ezTranSubmit', 'ezTranNonce');
       $plugins = get_plugins();
       $selPlugin = "<div style='' onmouseover = 'Tip(\"Hover over any of the labels below (like Select Plugin, for instance) for quick help.\",WIDTH, 300)' onmouseout='UnTip()'><h3>Input Selection</h3>[Hover over label for quick help.]<br /><br /></div><div style='width: 15%; float:left' onmouseover = 'Tip(\"Select one of your plugins to get started.\",WIDTH, 300)' onmouseout='UnTip()'>Select Plugin:</div><select style='width: 40%' name='ezt-plugin'>";
+      $v = reset($plugins);
+      $this->eztPlgName = $v['Name'];
       foreach ($plugins as $k => $v) {
         if ($k == $this->eztPlgSlug) {
           $selected = ' selected="selected" ';
