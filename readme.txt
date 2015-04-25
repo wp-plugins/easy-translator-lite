@@ -3,8 +3,8 @@ Contributors: manojtd
 Donate link: http://buy.thulasidas.com/easy-translator
 Tags: plugins, internationalization, translation, translator, localization, i18n, l10n
 Requires at least: 2.8
-Tested up to: 4.1
-Stable tag: 4.30
+Tested up to: 4.2
+Stable tag: 4.40
 
 Easy Translator is a machine translator for blog posts and a plugin translation tool for developers and translators.
 
@@ -25,7 +25,7 @@ Note that *Easy Translator* is now a blog page translator for a blogger, althoug
 
 == Upgrade Notice ==
 
-Compatibility with WP4.1.
+Compatibility with WordPress 4.2.
 
 == Screenshots ==
 
@@ -61,6 +61,7 @@ To enable blog page/post translation, find the Easy Translator widget (under the
 
 == Change Log ==
 
+* V4.40: Compatibility with WordPress 4.2. [April 25, 2015]
 * V4:30: Compatibility with WP4.1. [Jan 8, 2015]
 * V4.21: Minor change to the admin interface. [Sep 9, 2011]
 * V4.20: Bug fixes, compatibility with WP4.0. [Sep 8, 2014]
