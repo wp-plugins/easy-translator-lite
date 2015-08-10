@@ -3,35 +3,38 @@ Contributors: manojtd
 Donate link: http://buy.thulasidas.com/easy-translator
 Tags: plugins, internationalization, translation, translator, localization, i18n, l10n
 Requires at least: 2.8
-Tested up to: 4.2
-Stable tag: 4.40
+Tested up to: 4.3
+Stable tag: 4.50
 
 Easy Translator is a machine translator for blog posts and a plugin translation tool for developers and translators.
 
 == Description ==
 
-*Easy Translator* is a plugin to translate other plugins as well as blog posts and pages. It provides a customizable widget to enable machine translation (from Google or Microsoft). For plugin translation, it picks up translatable strings (in `_[_e]()` functions) and presents them and their existing translations (from the MO object of the current text-domain, if loaded) in a user editable form. It can generate a valid PO file that can be emailed to the plugin author.
+*Easy Translator* is a plugin to translate your blog posts and pages. It provides a customizable widget to enable machine translation (from Google or Microsoft).
 
-The [Pro Version](http://buy.thulasidas.com/easy-translator "Buy the Pro Version for $3.95") adds the following features:
+*Easy Translator* also provides a tool for plugin authors and translators. This tool picks up translatable strings (in `_[_e]()` functions) and presents them and their existing translations (from the MO object of the current text-domain, if loaded) in a user editable form. It can generate a valid PO file that can be emailed to the plugin author.
 
-1. Machine translation help to seed your plugin translation efforts. That is, for each translatable string found, it will give you a translation as provided by Google, which you can edit and perfect.
-2. Auto identification of the text-domain used by the plugin being translated.
-3. Email support so that your translators can send the PO file directly from the its window, streamlining their work.
-4. Color-pickers for the blog post translation widget, to customize and match your colors with your theme.
+The [Pro Version](http://buy.thulasidas.com/easy-translator "Buy the Pro Version for $4.95") adds the following features:
+
+1. Color-pickers for the blog post translation widget, to customize and match your colors with your theme.
+2. Machine translation help to seed your plugin translation efforts. That is, for each translatable string found, it will give you a translation as provided by Google, which you can edit and perfect.
+3. Auto identification of the text-domain used by the plugin being translated.
+4. Email support so that your translators can send the PO file directly from the its window, streamlining their work.
 
 If you are a plugin author interested in internationalizing your plugins, you may want to ask your potential translators to install *Easy Translator* to make it a snap to give you translations. If you want to clean up your internationalization, you will appreciate *Easy Translator* because it does a fuzzy string matching to highlight possible repetitions and conflicts among key strings.
 
-Note that *Easy Translator* is now a blog page translator for a blogger, although it was originally written as a tool for plugin authors and the kind international users who put in their time and effort to translate plugins.
 
 == Upgrade Notice ==
 
-Compatibility with WordPress 4.2.
+Adding a settings page with detailed help on the plugin. Compatibility with WordPress 4.3.
 
 == Screenshots ==
 
-1. How to launch *Easy Translator* - Where to find it?
-2. How to use *Easy Translator* - The Editor
-3. How to use *Easy Translator* - The POT File Viewer
+1. Blog page translation - Google widget
+2. Blog page translation - Microsoft widget
+3. Widget customization
+4. How to use the plugin translator - The Editor
+5. The POT File Viewer in the plugin translator.
 
 == Installation ==
 
@@ -40,6 +43,14 @@ Compatibility with WordPress 4.2.
 3. Go to the Tools -> Easy Translator to use it.
 
 == Frequently Asked Questions ==
+
+= I installed the plugin. Nothing happens. Where is the translator? =
+
+Please go to Appearance -> Widgets, drag and drop the Easy Translator widget to the sidebar of your choice. Select Microsoft (default) or Google and save. You will find the translator widget on your sidebar.
+
+= The Pro version is supposed to let me customize the translation widget colors. How? =
+
+Please go to Appearance -> Widgets and add/modify the translation widgets. You will see the color pickers there.
 
 = Looks good, but doesn't work! =
 
@@ -61,6 +72,7 @@ To enable blog page/post translation, find the Easy Translator widget (under the
 
 == Change Log ==
 
+* V4.50: Adding a settings page with detailed help on the plugin. Compatibility with WordPress 4.3. [Aug 10, 2015]
 * V4.40: Compatibility with WordPress 4.2. [April 25, 2015]
 * V4:30: Compatibility with WP4.1. [Jan 8, 2015]
 * V4.21: Minor change to the admin interface. [Sep 9, 2011]
@@ -89,4 +101,3 @@ To enable blog page/post translation, find the Easy Translator widget (under the
 * V2.00: Releasing a Lite and Pro version. [Mar 6, 2012]
 * V1.01: Correcting a few minor bugs (a) Author email (of the plugin being translated was set to the author of this plugin. (b) The name of the plugin was set to *Easy AdSense* (Thanks, Sub!). (c) Some corrections are needed for escaping quotation marks and line breaks in locales other than English. Will include them in the next release. (Hard to test because my locale is en_US).
 * V1.00: Initial release. [July 21, 2009]
-

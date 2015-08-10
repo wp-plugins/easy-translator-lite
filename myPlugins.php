@@ -45,7 +45,7 @@ $myPlugins['ezpaypal-pro'] = $myPlugins['ezpaypal'];
 $myPlugins['easy-paypal'] = $myPlugins['ezpaypal'];
 
 $myPlugins['ads-ez'] = array('value' => 'Ads EZ',
-    'price' => '14.95',
+    'price' => '20.95',
     'share' => false,
     'long' => false,
     'blurb' => '<em><strong>Ads EZ</strong></em> is a simple, yet powerful, personal ad server. This standalone PHP package ',

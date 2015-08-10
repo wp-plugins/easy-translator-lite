@@ -3,7 +3,7 @@
 Plugin Name: Easy Translator
 Plugin URI: http://www.thulasidas.com/easy-translator
 Description: A plugin to translate other plugins (Yes, any other plugin) and blog pages. Access it by clicking <a href="tools.php?page=easy-translator-lite/easy-translator-lite.php">Tools &rarr; Easy Translator</a>.
-Version: 4.40
+Version: 4.50
 Author: Manoj Thulasidas
 Author URI: http://www.thulasidas.com
 */
@@ -191,7 +191,7 @@ if (!class_exists("EasyTranslator")) {
       $this->mkEzTran();
     }
 
-    function printAdminPage() {
+    function printToolPage() {
       $this->mkEzTran();
       $this->handleSubmits();
       $this->getSessionVars();
@@ -345,6 +345,59 @@ EOF;
       }
       return $links;
     }
+    //Prints out the admin page
+    function printAdminPage() {
+      $ez = parent::printAdminPage();
+      if (empty($ez)) {
+        return;
+      }
+      echo '<script type="text/javascript" src="' . $this->plgURL . '/wz_tooltip.js"></script>';
+      ?>
+
+      <div class="wrap" style="width:1000px">
+        <h2>Easy Translator Information</h2>
+
+        <table style="width:100%">
+          <tr style="vertical-align:top">
+            <td style="width:40%">
+              <h3>
+                Blog Post/Page and Plugin Translator
+              </h3>
+              <ul style='padding-left:10px;list-style-type:circle; list-style-position:inside;'>
+                <li>
+                  Blog Page Translator: Use  <a href="widgets.php"> Appearance &rarr; Widgets</a>
+                </li>
+                <li>
+                  Plugin Translator: Use <a href="tools.php?page=easy-translator/easy-translator.php">Tools &rarr; Easy Translator</a>
+                </li>
+              </ul>
+            </td>
+
+            <?php include ($this->plgDir . '/head-text.php'); ?>
+
+          </tr>
+        </table>
+
+        <h3>
+          Detailed Help
+        </h3>
+              <ul style='padding-left:10px;list-style-type:circle; list-style-position:inside;'>
+                <li>
+                  Blog Page Translator: This plugin can provide blog page translation using Microsoft or Google translator. The translator is added to your blog using widgets, which can be found at <a href="widgets.php"> Appearance &rarr; Widgets</a>. Drag and drop the widget titled "Easy Translator Pro" to the side bar of your choice and customize to use either Microsoft or Google translator. In the <a href='http://buy.thulasidas.com/easy-translator' class='popup' target="_blank">Pro</a> version of the plugin, you can customize the Microsoft translator using colorpickers to match your theme.
+                </li>
+                <li>
+                  Plugin Translator: Easy Translator has a powerful plugin translation function, which is immensely useful for plugin developers and translators. It can go through the plugin files of any plugin installed on your blog and pick up translatable strings, which will be presented to you using a friendly interface to create the translation file (<code>PO</code> file). Once the translations are entered, a fully functional language can be downloaded. Please find it at <a href="tools.php?page=easy-translator/easy-translator.php">Tools &rarr; Easy Translator</a>. In <a href='http://buy.thulasidas.com/easy-translator' class='popup' target="_blank">Easy Translator Pro</a>, the strings are automatically translated using Google so that your translation load is minimized. Furthermore, you can email the language file directly from the plugin interface.
+                </li>
+              </ul>
+
+        <?php
+        $ez->renderSupport();
+        include ($this->plgDir . '/tail-text.php');
+        ?>
+      </div>
+
+      <?php
+    }
 
   }
 
@@ -358,9 +411,11 @@ if (class_exists("EasyTranslator")) {
 
       function ezTran_ap() {
         global $ezTran;
+        $mName = 'Easy Translator';
         if (function_exists('add_submenu_page')) {
-          add_submenu_page('tools.php', 'Easy Translator', 'Easy Translator', "install_plugins", __FILE__, array($ezTran, 'printAdminPage'));
+          add_submenu_page('tools.php', $mName, $mName, "install_plugins", __FILE__, array($ezTran, 'printToolPage'));
         }
+        add_options_page($mName, $mName, 'activate_plugins', basename(__FILE__), array($ezTran, 'printAdminPage'));
         add_filter('plugin_action_links', array($ezTran, 'plugin_action'), -10, 2);
       }
 
@@ -377,7 +432,7 @@ if (!class_exists("EasyTranslatorWidget")) {
     function EasyTranslatorWidget() {
       $widgetOps = array('description' =>
           'Translate Blog posts and pages using Easy Translator Lite.');
-      parent::WP_Widget(false, $name = 'Easy Translator', $widgetOps);
+      parent::__construct(false, $name = 'Easy Translator', $widgetOps);
     }
 
     function widget($args, $instance) {
